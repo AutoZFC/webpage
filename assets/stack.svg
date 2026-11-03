@@ -6,14 +6,14 @@
   </defs>
   <rect width="760" height="400" fill="#ffffff"/>
   <text x="24" y="34" font-size="15" font-weight="600" fill="#1f2328">Deleting the meta-logic leaves one language with two calculi</text>
-  <text x="24" y="54" font-size="11.5" fill="#59636e">Isabelle/ZF as written (left) and what isa2fol emits (right)</text>
+  <text x="24" y="54" font-size="11.5" fill="#59636e">Left: Isabelle/ZF as written. Right: after isa2fol. ND = natural deduction, LK = sequent calculus</text>
 
   <rect x="24" y="76" width="296" height="300" rx="8" fill="none" stroke="#8c959f"/>
   <text x="40" y="98" font-weight="600" fill="#1f2328">Isabelle/ZF: four layers</text>
 
   <rect x="40" y="112" width="264" height="56" rx="8" fill="none" stroke="#8c959f" stroke-width="1.25" stroke-dasharray="5 4"/>
   <text x="56" y="136" font-weight="600" fill="#1f2328">Tactics</text>
-  <text x="56" y="152" font-size="11.5" fill="#59636e">blast, simp, apply scripts</text>
+  <text x="56" y="152" font-size="11.5" fill="#59636e">proof automation: blast, simp</text>
   <text x="288" y="136" text-anchor="end" font-size="11.5" fill="#59636e">removed</text>
 
   <rect x="40" y="176" width="264" height="56" rx="8" fill="none" stroke="#8c959f" stroke-width="1.25"/>
@@ -22,11 +22,11 @@
 
   <rect x="40" y="240" width="264" height="56" rx="8" fill="none" stroke="#8c959f" stroke-width="1.25"/>
   <text x="56" y="264" font-weight="600" fill="#1f2328">FOL</text>
-  <text x="56" y="280" font-size="11.5" fill="#59636e">the object logic</text>
+  <text x="56" y="280" font-size="11.5" fill="#59636e">first-order logic underneath ZF</text>
 
   <rect x="40" y="304" width="264" height="56" rx="8" fill="none" stroke="#8c959f" stroke-width="1.25" stroke-dasharray="5 4"/>
-  <text x="56" y="328" font-weight="600" fill="#1f2328">Pure</text>
-  <text x="56" y="344" font-size="11.5" fill="#59636e">meta-logic: ⋀, ⟹, λ, schematic vars</text>
+  <text x="56" y="328" font-weight="600" fill="#1f2328">Meta-logic (Pure)</text>
+  <text x="56" y="344" font-size="11.5" fill="#59636e">⋀, ⟹, λ, schematic variables</text>
   <text x="288" y="328" text-anchor="end" font-size="11.5" fill="#59636e">removed</text>
 
   <path d="M320 226H440" fill="none" stroke="#8c959f" stroke-width="1.25" marker-end="url(#arrow)"/>
@@ -35,7 +35,7 @@
   <text x="380" y="262" text-anchor="middle" font-size="11.5" fill="#59636e">theorems</text>
 
   <rect x="440" y="76" width="296" height="300" rx="8" fill="none" stroke="#8c959f"/>
-  <text x="456" y="98" font-weight="600" fill="#1f2328">isa2fol output: one logic</text>
+  <text x="456" y="98" font-weight="600" fill="#1f2328">After isa2fol: one logic</text>
 
   <rect x="456" y="112" width="112" height="56" rx="8" fill="none" stroke="#8c959f" stroke-width="1.25"/>
   <text x="472" y="136" font-weight="600" fill="#1f2328">ND</text>
@@ -46,15 +46,15 @@
   <text x="624" y="152" font-size="11.5" fill="#59636e">for search</text>
 
   <path d="M568 140H608" fill="none" stroke="#8c959f" stroke-width="1.25" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="588" y="196" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1f2328">NDtoLKR</text>
+  <text x="588" y="196" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1f2328">translator</text>
   <text x="588" y="212" text-anchor="middle" font-size="11.5" fill="#59636e">LK ≈ 1.08× ND</text>
   <path d="M512 168V232M664 168V232" fill="none" stroke="#8c959f" stroke-width="1.25"/>
 
   <rect x="456" y="232" width="264" height="128" rx="8" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-width="2"/>
-  <text x="472" y="256" font-weight="600" fill="#1f2328">First-order NBG</text>
-  <text x="472" y="274" font-size="11.5" fill="#1f2328">3 predicates: elem, eq, set</text>
+  <text x="472" y="256" font-weight="600" fill="#1f2328">First-order set theory (NBG)</text>
+  <text x="472" y="274" font-size="11.5" fill="#1f2328">3 predicates: ∈, =, is-a-set</text>
   <text x="472" y="290" font-size="11.5" fill="#1f2328">no function symbols</text>
-  <text x="472" y="306" font-size="11.5" fill="#1f2328">λ, functions, constants → classes</text>
-  <text x="472" y="322" font-size="11.5" fill="#1f2328">schemas → ∀-elimination</text>
-  <text x="472" y="338" font-size="11.5" fill="#1f2328">19 axioms, nothing else admitted</text>
+  <text x="472" y="306" font-size="11.5" fill="#1f2328">functions, constants → classes</text>
+  <text x="472" y="322" font-size="11.5" fill="#1f2328">19 axioms, nothing else assumed</text>
+  <text x="472" y="338" font-size="11.5" fill="#1f2328">one small proof checker</text>
 </svg>

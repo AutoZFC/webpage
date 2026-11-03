@@ -1,31 +1,33 @@
 ---
 layout: post
 title: "Why bring Isabelle/ZF down to first-order logic?"
-description: "Deleting the meta-logic turns a proof library into data, and switching from natural deduction to the sequent calculus becomes a program. Can AI treat formulas, not words, as first-class citizens?"
+description: "Deleting the meta-logic turns a proof library into data, and classic results about first-order logic become programs you can run on it. Can AI treat formulas, not words, as first-class citizens?"
 image: /assets/why-first-order-card.png
 ---
 
-[isa2fol](https://github.com/AutoZFC/isa2fol) translates Isabelle/ZF into plain first-order logic. This post explains
-why that is worth doing, and the question it leads to.
+[Isabelle/ZF](https://isabelle.in.tum.de/) is the set theory library of the Isabelle proof assistant: thousands of
+machine-checked theorems, from ordinals and cardinals to Gödel's constructible universe.
+[isa2fol](https://github.com/AutoZFC/isa2fol) translates it into plain first-order logic. This post explains why that
+is worth doing, and the question it leads to.
 
 ## Delete the meta-logic
 
-Most proof assistants put a meta-level on top of the logic you care about. In Isabelle that is Pure, a higher-order
-meta-logic with its own ⋀, ⟹ and λ, and above it tactics such as `blast` and `simp`. That stack is great for writing
-proofs. It gets in the way when you want to treat proofs as data.
+Most proof assistants put a meta-level on top of the logic you care about. Isabelle's is a higher-order meta-logic
+(called Pure) with its own "implies" ⟹, "for all" ⋀ and λ. Above it sit tactics, proof automation commands such as
+`blast` and `simp`. That stack is great for writing proofs. It gets in the way when you want to treat proofs as data.
 
-isa2fol removes the meta-level. Every theorem becomes a first-order proof in NBG set theory: three predicates (`elem`,
-`eq`, `set`), no function symbols, and NBG's 19 axioms, nothing else admitted.
+isa2fol removes the meta-level. Every theorem becomes a first-order proof in NBG (von Neumann–Bernays–Gödel), a
+standard set theory that also has classes. There are three predicates (membership, equality and "is a set"), no
+function symbols, and nothing assumed beyond NBG's 19 axioms.
 
-- Pure's ⟹ and ⋀ become ordinary → and ∀.
-- λ-terms, functions and constants become classes.
-- A predicate variable becomes a schema, proved once with the predicate left open.
+- The meta-level ⟹ and ⋀ become ordinary → and ∀.
+- Functions, constants and anonymous functions (λ-terms) become classes.
+- A theorem about an arbitrary property P is proved once with P left open, then instantiated wherever it is used.
 
-NBG is conservative over ZFC, so nothing changes for statements about sets. A small kernel,
-[fol-zfc](https://github.com/AutoZFC/fol-zfc-comb), checks every proof. Today 9,404 of the 9,420 named theorems in
-Isabelle/ZF's eight sessions translate and check.
+NBG proves exactly the same theorems about sets as ZFC, the usual foundation of mathematics. A small, separate proof
+checker checks every translated proof. Today 9,404 of the 9,420 theorems in Isabelle/ZF translate and check.
 
-![Isabelle/ZF's four layers, with tactics and the Pure meta-logic removed, become one first-order NBG layer that both ND and LK proofs sit on]({{ "/assets/stack.svg" | relative_url }})
+![Isabelle/ZF's four layers, with tactics and the meta-logic removed, become one first-order set theory that both natural deduction and sequent calculus proofs sit on]({{ "/assets/stack.svg" | relative_url }})
 
 ### A taste of reification
 
@@ -35,8 +37,9 @@ of pairs.
 
 - `succ` becomes a class `Succ` of input–output pairs, and the term `succ(i)` becomes "the r with ⟨i, r⟩ ∈ `Succ`".
 - So `x ∈ succ(i)` becomes, roughly, `∃r. ⟨i, r⟩ ∈ Succ ∧ x ∈ r`.
-- Each such class owes two facts, proved once from the axioms: it exists, and it gives exactly one r per input.
-- Several arguments are packed into one tuple first, and a λ-term is reified the same way, right where it appears.
+- Each such class comes with two facts, proved once from the axioms: it exists, and it gives exactly one r per input.
+- Several arguments are packed into one tuple first, and an anonymous function is reified the same way, right where
+  it appears.
 
 If you write compilers, this is defunctionalization: a function becomes data, and applying it becomes a membership
 lookup.
@@ -46,22 +49,23 @@ lookup.
 First-order logic is the most studied logic there is. Once the whole library is plain first-order logic, its classic
 theorems stop being facts on paper and become translators you can run on every proof:
 
-- **Sequent calculus.** Gentzen (1935) turns natural deduction into LK, the calculus built for search.
+- **Sequent calculus.** Gentzen (1935) turns natural deduction, the usual style of written proofs, into the sequent
+  calculus (LK), which is built for search.
 - **SAT.** Herbrand's theorem reduces a first-order proof to a propositional tautology over finitely many instances,
   which is what SAT solvers check.
-- **λ-calculus.** Curry–Howard reads natural-deduction proofs as typed λ-terms (λμ for classical steps), so
-  simplifying a proof is running a program.
-- **Automated provers.** First-order logic is the native input of provers such as Vampire and E, so every statement
-  is a ready-made benchmark.
+- **λ-calculus.** Curry–Howard reads natural-deduction proofs as typed programs (with an extension for classical
+  reasoning), so simplifying a proof is running a program.
+- **Automated provers.** First-order logic is the native input of automated provers such as Vampire and E, so every
+  statement is a ready-made benchmark.
 
 Over a meta-logic full of tactics, these theorems have nothing to hold on to. Over first-order logic, each one is a
-program, and only the small kernel has to be trusted, not the program.
+program, and only the small checker has to be trusted, not the program.
 
-The first of these is built. Natural deduction (ND) is good for reading proofs; LK is good for searching for them,
-because every rule works backwards from the goal. In theory the translation covers every proof. In practice fol-zfc's
-NDtoLKR converts 99.8% of a 3,236-claim sample with no translator errors; the other 0.2% ran out of memory. An
-unmodified LK checker verifies every output. Counting each identity step (A ⊢ A) as one step, an LK proof is 1.08×
-the size of its ND proof.
+The first of these is built. Natural deduction is good for reading proofs; the sequent calculus is good for searching
+for them, because every rule works backwards from the goal. In theory the translation covers every proof. In practice
+our translator converts 99.8% of a sample of 3,236 proofs with no errors; the other 0.2% ran out of memory. A separate
+sequent-calculus checker verifies every result. The new proofs come out about the same size as the originals (1.08×),
+once each routine "A follows from A" check counts as a single step.
 
 ## The question: formulas, not words
 
