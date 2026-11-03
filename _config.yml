@@ -1,0 +1,13 @@
+title: AutoZFC
+description: Mathematics in plain first-order logic, a small proof checker, and proof search.
+url: https://autozfc.github.io
+baseurl: /webpage
+theme: minima
+github_username: AutoZFC
+permalink: /:title/
+show_excerpts: true
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+exclude:
+  - README.md
