@@ -47,9 +47,9 @@ With one first-order language, textbook proof theory applies directly. Natural d
 proofs. The sequent calculus (LK) is good for searching for them: every rule works backwards from the goal, so the
 possible moves come from the goal itself. Gentzen showed how to move between the two in 1935.
 
-Over a meta-logic full of tactics, that theorem has nothing to hold on to. Over first-order logic it is a translator.
-fol-zfc's NDtoLKR converts 99.8% of a 3,236-claim sample with no translator errors, and an unmodified LK checker
-verifies every output. Counting each identity step (A ⊢ A) as one step, an LK proof is 1.08× the size of its ND proof.
+Over a meta-logic full of tactics, that theorem has nothing to hold on to. Over first-order logic it is a translator,
+and in theory it covers every proof. In practice fol-zfc's NDtoLKR converts 99.8% of a 3,236-claim sample with no
+translator errors; the other 0.2% ran out of memory. An unmodified LK checker verifies every output. Counting each identity step (A ⊢ A) as one step, an LK proof is 1.08× the size of its ND proof.
 
 The same holds for any tool: with one language and one checker, it runs on the whole corpus, and only the checker has
 to be trusted.
