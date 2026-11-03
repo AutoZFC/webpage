@@ -29,9 +29,10 @@ checker checks every translated proof. Today 9,404 of the 9,420 theorems in Isab
 
 ![Isabelle/ZF's four layers, with tactics and the meta-logic removed, become one first-order set theory that both natural deduction and sequent calculus proofs sit on]({{ "/assets/stack.svg" | relative_url }})
 
-### A taste of reification
+### A taste of reification: the meta-logic as classes
 
-With no function symbols, how do you write `succ(i)`, which is i ∪ {i}? You reify it: turn the operation into an
+In Isabelle, an operation like `succ(i)`, which is i ∪ {i}, is a function of the meta-logic, not an object of set
+theory. With no meta-logic and no function symbols, how do you write it? You reify it: turn the operation into an
 object the logic can talk about, namely its graph. Mathematicians know the trick already, since a function *is* a set
 of pairs.
 
