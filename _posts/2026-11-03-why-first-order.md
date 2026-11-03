@@ -41,18 +41,27 @@ of pairs.
 If you write compilers, this is defunctionalization: a function becomes data, and applying it becomes a membership
 lookup.
 
-## What it buys: switching calculi is just a program
+## What it buys: a century of logic, as programs
 
-With one first-order language, textbook proof theory applies directly. Natural deduction (ND) is good for reading
-proofs. The sequent calculus (LK) is good for searching for them: every rule works backwards from the goal, so the
-possible moves come from the goal itself. Gentzen showed how to move between the two in 1935.
+First-order logic is the most studied logic there is. Once the whole library is plain first-order logic, its classic
+theorems stop being facts on paper and become translators you can run on every proof:
 
-Over a meta-logic full of tactics, that theorem has nothing to hold on to. Over first-order logic it is a translator,
-and in theory it covers every proof. In practice fol-zfc's NDtoLKR converts 99.8% of a 3,236-claim sample with no
-translator errors; the other 0.2% ran out of memory. An unmodified LK checker verifies every output. Counting each identity step (A ⊢ A) as one step, an LK proof is 1.08× the size of its ND proof.
+- **Sequent calculus.** Gentzen (1935) turns natural deduction into LK, the calculus built for search.
+- **SAT.** Herbrand's theorem reduces a first-order proof to a propositional tautology over finitely many instances,
+  which is what SAT solvers check.
+- **λ-calculus.** Curry–Howard reads natural-deduction proofs as typed λ-terms (λμ for classical steps), so
+  simplifying a proof is running a program.
+- **Automated provers.** First-order logic is the native input of provers such as Vampire and E, so every statement
+  is a ready-made benchmark.
 
-The same holds for any tool: with one language and one checker, it runs on the whole corpus, and only the checker has
-to be trusted.
+Over a meta-logic full of tactics, these theorems have nothing to hold on to. Over first-order logic, each one is a
+program, and only the small kernel has to be trusted, not the program.
+
+The first of these is built. Natural deduction (ND) is good for reading proofs; LK is good for searching for them,
+because every rule works backwards from the goal. In theory the translation covers every proof. In practice fol-zfc's
+NDtoLKR converts 99.8% of a 3,236-claim sample with no translator errors; the other 0.2% ran out of memory. An
+unmodified LK checker verifies every output. Counting each identity step (A ⊢ A) as one step, an LK proof is 1.08×
+the size of its ND proof.
 
 ## The question: formulas, not words
 
