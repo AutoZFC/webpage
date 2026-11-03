@@ -27,6 +27,20 @@ Isabelle/ZF's eight sessions translate and check.
 
 ![Isabelle/ZF's four layers, with tactics and the Pure meta-logic removed, become one first-order NBG layer that both ND and LK proofs sit on]({{ "/assets/stack.svg" | relative_url }})
 
+### A taste of reification
+
+With no function symbols, how do you write `succ(i)`, which is i ∪ {i}? You reify it: turn the operation into an
+object the logic can talk about, namely its graph. Mathematicians know the trick already, since a function *is* a set
+of pairs.
+
+- `succ` becomes a class `Succ` of input–output pairs, and the term `succ(i)` becomes "the r with ⟨i, r⟩ ∈ `Succ`".
+- So `x ∈ succ(i)` becomes, roughly, `∃r. ⟨i, r⟩ ∈ Succ ∧ x ∈ r`.
+- Each such class owes two facts, proved once from the axioms: it exists, and it gives exactly one r per input.
+- Several arguments are packed into one tuple first, and a λ-term is reified the same way, right where it appears.
+
+If you write compilers, this is defunctionalization: a function becomes data, and applying it becomes a membership
+lookup.
+
 ## What it buys: switching calculi is just a program
 
 With one first-order language, textbook proof theory applies directly. Natural deduction (ND) is good for reading
