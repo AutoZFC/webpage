@@ -26,7 +26,8 @@ function symbols, and nothing assumed beyond NBG's 19 axioms.
 
 NBG proves exactly the same theorems about sets as ZF with the axiom of choice (ZFC), the usual foundation of
 mathematics. A small, separate proof
-checker checks every translated proof. Today 9,404 of the 9,420 theorems in Isabelle/ZF translate and check.
+checker checks every translated proof. Today 9,404 of the 9,420 theorems in eight of Isabelle/ZF's nine sessions (its
+sub-libraries) translate and check; the ninth, ZF-UNITY, is beyond what Isabelle's proof exporter handles today.
 
 ![Isabelle/ZF's four layers, with tactics and the meta-logic removed, become one first-order set theory that both natural deduction and sequent calculus proofs sit on]({{ "/assets/stack.svg" | relative_url }})
 
