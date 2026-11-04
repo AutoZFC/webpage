@@ -63,11 +63,11 @@ be written as a tool and run on every proof:
 These recipes are stated for first-order proofs, so a meta-logic full of tactics gives them nothing to hold on to.
 And the tools need not be trusted: the small checker checks everything they produce.
 
-The first of these tools is built. Natural deduction is good for reading proofs; the sequent calculus is good for searching
-for them, because every rule works backwards from the goal. In theory the translation covers every proof. In practice
-our translator converts 99.8% of a sample of 3,236 proofs with no errors; the other 0.2% ran out of memory. A separate
-sequent-calculus checker verifies every result. The new proofs come out about the same size as the originals (1.08×),
-once each routine "A follows from A" check counts as a single step.
+The first of these tools is built. Natural deduction is good for reading proofs; the sequent calculus is good for
+searching for them, because every rule works backwards from the goal. Our translator turns the library's
+natural-deduction proofs into sequent-calculus proofs mechanically, and a separate sequent-calculus checker verifies
+every result. The new proofs come out about the same size as the originals (1.08×), once each routine "A follows from
+A" check counts as a single step. The other recipes, such as SAT and the λ-calculus, could be built the same way.
 
 ## The question: formulas, not words
 
