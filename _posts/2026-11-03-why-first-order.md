@@ -5,8 +5,8 @@ description: "Deleting the meta-logic turns a proof library into data, and class
 image: /assets/why-first-order-card.png
 ---
 
-[Isabelle/ZF](https://isabelle.in.tum.de/) is the set theory library of the Isabelle proof assistant: thousands of
-machine-checked theorems, from ordinals and cardinals to Gödel's constructible universe.
+[Isabelle/ZF](https://isabelle.in.tum.de/) is the Isabelle proof assistant's library of Zermelo–Fraenkel (ZF) set
+theory: thousands of machine-checked theorems, from ordinals and cardinals to Gödel's constructible universe.
 [isa2fol](https://github.com/AutoZFC/isa2fol) translates it into plain first-order logic. This post explains why that
 is worth doing, and the question it leads to.
 
@@ -24,7 +24,8 @@ function symbols, and nothing assumed beyond NBG's 19 axioms.
 - Functions, constants and anonymous functions (λ-terms) become classes.
 - A theorem about an arbitrary property P is proved once with P left open, then instantiated wherever it is used.
 
-NBG proves exactly the same theorems about sets as ZFC, the usual foundation of mathematics. A small, separate proof
+NBG proves exactly the same theorems about sets as ZFC (ZF plus the axiom of choice), the usual foundation of
+mathematics. A small, separate proof
 checker checks every translated proof. Today 9,404 of the 9,420 theorems in Isabelle/ZF translate and check.
 
 ![Isabelle/ZF's four layers, with tactics and the meta-logic removed, become one first-order set theory that both natural deduction and sequent calculus proofs sit on]({{ "/assets/stack.svg" | relative_url }})
