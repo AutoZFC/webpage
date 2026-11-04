@@ -16,15 +16,15 @@ Most proof assistants put a meta-level on top of the logic you care about. Isabe
 (called Pure) with its own "implies" ⟹, "for all" ⋀ and λ. Above it sit tactics, proof automation commands such as
 `blast` and `simp`. That stack is great for writing proofs. It gets in the way when you want to treat proofs as data.
 
-isa2fol removes the meta-level. Every theorem becomes a first-order proof in NBG (von Neumann–Bernays–Gödel), a
-standard set theory that also has classes. There are three predicates (membership, equality and "is a set"), no
+isa2fol removes the meta-level. Every theorem becomes a first-order proof in von Neumann–Bernays–Gödel (NBG)
+set theory, a standard set theory that also has classes. There are three predicates (membership, equality and "is a set"), no
 function symbols, and nothing assumed beyond NBG's 19 axioms.
 
 - The meta-level ⟹ and ⋀ become ordinary → and ∀.
 - Functions, constants and anonymous functions (λ-terms) become classes.
 - A theorem about an arbitrary property P is proved once with P left open, then instantiated wherever it is used.
 
-NBG proves exactly the same theorems about sets as ZFC (ZF plus the axiom of choice), the usual foundation of
+NBG proves exactly the same theorems about sets as ZF with the axiom of choice (ZFC), the usual foundation of
 mathematics. A small, separate proof
 checker checks every translated proof. Today 9,404 of the 9,420 theorems in Isabelle/ZF translate and check.
 
